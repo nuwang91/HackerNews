@@ -1,5 +1,7 @@
 @import '../../../../style/include';
 
+$news-margin-block: (12px/$base-rem + rem);
+
 :host {
     width: inherit;
     flex: 1;
@@ -15,7 +17,7 @@
 }
 
 .news-card-wrapper {
-    margin-block-end: 12px;
+    margin-block-end: $news-margin-block;
 
     a {
         text-decoration: none;

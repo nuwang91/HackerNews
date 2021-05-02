@@ -1,5 +1,7 @@
 @import '../../style/include';
 
+$shell-button-line-height: (22px/$base-rem + rem);
+
 :host {
     height: inherit;
     width: inherit;
@@ -42,7 +44,7 @@
             height: $spacing-big;
             font-weight: $font-weight-bold;
             background-color: $primary-color;
-            line-height: 22px;
+            line-height: $shell-button-line-height;
             color: #000000;
 
             .spinner {

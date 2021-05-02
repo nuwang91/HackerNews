@@ -9,6 +9,13 @@ $card-title-line-height: $spacing-small;
 $card-body-line-height: (14px/$base-rem + rem);
 $card-meta-line-height: (11px/$base-rem + rem);
 
+$card-title-margin-block: (4px/$base-rem + rem);
+
+$card-line-margin-inline: (6px/$base-rem + rem);
+
+$card-clock-margin-inline: (3px/$base-rem + rem);
+$card-clock-size: (10px/$base-rem + rem);
+
 .card-container {
     height: $card-height;
     background-color: #FFFFFF;
@@ -23,7 +30,7 @@ $card-meta-line-height: (11px/$base-rem + rem);
         font-weight: $font-weight-bold;
         font-size: 12px;
         line-height: $card-title-line-height;
-        margin-block-end: 4px;
+        margin-block-end: $card-title-margin-block;
         color: $text-black-color;
     }
 
@@ -41,9 +48,9 @@ $card-meta-line-height: (11px/$base-rem + rem);
 
         .clock {
             align-self: center;
-            width: 10px;
-            height: 10px;
-            margin-inline-end: 3px;
+            width: $card-clock-size;
+            height: $card-clock-size;
+            margin-inline-end: $card-clock-margin-inline;
             background-repeat: no-repeat;
             background-size: contain;
             background-position-y: center;
@@ -51,8 +58,8 @@ $card-meta-line-height: (11px/$base-rem + rem);
         }
 
         .line {
-            margin-inline-start: 6px;
-            margin-inline-end: 6px;
+            margin-inline-start: $card-line-margin-inline;
+            margin-inline-end: $card-line-margin-inline;
             width: 1px;
             background-repeat: no-repeat;
             background-size: contain;
