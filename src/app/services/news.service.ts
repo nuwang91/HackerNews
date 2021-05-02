@@ -9,7 +9,7 @@ export class NewsService {
   private _loadMore$: Subject<void> = new Subject<void>();
   loadMore$: Observable<void> = this._loadMore$.asObservable();
 
-  private _loading$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(true);
+  private _loading$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   loading$: Observable<boolean> = this._loading$.asObservable();
   
   constructor() { }
