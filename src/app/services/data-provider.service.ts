@@ -12,7 +12,7 @@ export class DataProviderService {
 
   constructor(private _http: HttpClient) { }
   
-  public getData(url: string, param: string = ''): Observable<any> {
+  getData(url: string, param: string = ''): Observable<any> {
     return this._http.get(`${this.API_URL}/${url}.json${param}`);
   }
 }

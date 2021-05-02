@@ -1,6 +1,6 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { ActivationEnd, Router } from '@angular/router';
-import { Observable, Subscription } from 'rxjs';
+import { ApplicationRef, ChangeDetectorRef, Component, OnDestroy } from '@angular/core';
+import { ActivationEnd, NavigationEnd, NavigationStart, Router } from '@angular/router';
+import { combineLatest, Observable, Subject, Subscription } from 'rxjs';
 import { filter } from 'rxjs/operators';
 import { NewsService } from '../services/news.service';
 
@@ -15,11 +15,17 @@ export class ShellComponent implements OnDestroy {
   newIsActive: boolean = false;
   bestIsActive: boolean = false;
 
+  private _overlay$: Subject<boolean> = new Subject<boolean>();
+  overlay$: Observable<boolean> = this._overlay$.asObservable();
+
   private _routerSubscription: Subscription;
+  private _overlaySubscription: Subscription;
 
   constructor(
     private _router: Router,
-    private _newsService: NewsService
+    private _newsService: NewsService,
+    private _applicationRef: ApplicationRef,
+    private _changeDetectorRef: ChangeDetectorRef
   ) {
 
     this._routerSubscription = this._router.events
@@ -38,11 +44,28 @@ export class ShellComponent implements OnDestroy {
             break;
         }
       });
+
+    this._overlaySubscription = combineLatest([
+      this._router.events.pipe(filter((e) => e instanceof NavigationStart || e instanceof NavigationEnd)),
+      this._applicationRef.isStable]
+    ).subscribe(([e, stable]) => {
+      if (e instanceof NavigationStart) {
+        this._overlay$.next(true);
+      }
+
+      if (e instanceof NavigationEnd && stable) {
+        this._overlay$.next(false);
+        this._changeDetectorRef.detectChanges();
+      }
+    });
   }
 
   ngOnDestroy(): void {
     if (this._routerSubscription) {
       this._routerSubscription.unsubscribe();
+    }
+    if (this._overlaySubscription) {
+      this._overlaySubscription.unsubscribe();
     }
   }
 
@@ -53,13 +76,13 @@ export class ShellComponent implements OnDestroy {
   hasClickedLink(param: string): void {
     switch (param) {
       case 'new':
-        if(this.newIsActive){
+        if (this.newIsActive) {
           this._router.navigateByUrl('');
           this.newIsActive = false;
         }
         break;
       case 'best':
-        if(this.bestIsActive){
+        if (this.bestIsActive) {
           this._router.navigateByUrl('');
           this.bestIsActive = false;
         }

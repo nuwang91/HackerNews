@@ -55,7 +55,6 @@ export class NewsComponent implements OnDestroy {
       this._routeSubscription = this._route.params.subscribe((params) => {
         this._resetTop();
         this.newsItems = [];
-        this._newsService.loading(true);
         this._setNewsType(params.type);
         this._getItems();
       });

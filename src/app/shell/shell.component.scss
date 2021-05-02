@@ -80,6 +80,23 @@ $shell-button-line-height: (22px/$base-rem + rem);
     }
 }
 
+.overlay {
+    position: absolute;
+    top: $header-height;
+    bottom: $footer-height;
+    background-color: $secondary-color;
+    opacity: 0.7;
+    z-index: 999;
+    width: 100%;
+    display: flex;
+
+    .spinner {
+        @include spinner(40px, 40px, 4px, $text-black-color);
+        z-index: 1000;
+        margin: auto;
+    }
+}
+
 .footer {
     @media #{$sm-only} {
         width: 100%;
