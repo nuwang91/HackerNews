@@ -1,0 +1,70 @@
+@import '../../../../style/include';
+
+//Changed the odd pixel to even number - Original was 123px
+$card-height: (124px/$base-rem + rem);
+
+$card-body-height: (44px/$base-rem + rem);
+
+$card-title-line-height: $spacing-small;
+$card-body-line-height: (14px/$base-rem + rem);
+$card-meta-line-height: (11px/$base-rem + rem);
+
+.card-container {
+    height: $card-height;
+    background-color: #FFFFFF;
+    box-shadow: $box-shadow;
+    border-radius: $border-radius;
+    padding: $spacing-small;
+    @include display-flex;
+    @include flex-wrap(wrap);
+
+
+    .title {
+        font-weight: $font-weight-bold;
+        font-size: 12px;
+        line-height: $card-title-line-height;
+        margin-block-end: 4px;
+        color: $text-black-color;
+    }
+
+    .body {
+        height: $card-body-height;
+        font-weight: $font-weight-normal;
+        font-size: 10px;
+        line-height: $card-body-line-height;
+        color: $text-black-color;
+        @include text-overflow();
+    }
+
+    .meta {
+        @include display-flex;
+
+        .clock {
+            align-self: center;
+            width: 10px;
+            height: 10px;
+            margin-inline-end: 3px;
+            background-repeat: no-repeat;
+            background-size: contain;
+            background-position-y: center;
+            background-image: url(../../../../images/icon/clock.svg);
+        }
+
+        .line {
+            margin-inline-start: 6px;
+            margin-inline-end: 6px;
+            width: 1px;
+            background-repeat: no-repeat;
+            background-size: contain;
+            background-position-y: center;
+            background-image: url(../../../../images/icon/line.svg);
+        }
+
+        .time, .comment {
+            font-size: 8px;
+            line-height: $card-meta-line-height;
+            color: $text-grey-color;
+            align-self: center;
+        }
+    }
+}
