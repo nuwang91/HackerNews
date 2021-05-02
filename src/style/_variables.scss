@@ -17,6 +17,7 @@ $spacing-huge: (96px/$base-rem + rem) !default;
 
 // Reusable style properties
 $box-shadow: 0px (3px/$base-rem + rem) (28px/$base-rem + rem) rgba(0, 0, 0, 0.08);
+$border-radius: (12px/$base-rem + rem);
 
 // Its not recommended to have odd pixel dimensions, therefore rounded it to have even numbers (Grid Layout)
 $header-height: (50px/$base-rem + rem) !default; // Originally 51

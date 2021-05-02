@@ -1,17 +1,17 @@
 @import '../../../../style/include';
 
 $nav-item-height: (24px/$base-rem + rem);
-$nav-item-border-radius: (12px/$base-rem + rem);
 $nav-item-padding-inline: (12px/$base-rem + rem);
 $nav-item-padding-block: (4px/$base-rem + rem);
 
 :host {
     height: $nav-item-height;
-    border-radius: $nav-item-border-radius;
+    border-radius: $border-radius;
     background-color: $secondary-color;
     padding: $nav-item-padding-block $nav-item-padding-inline;
     font-weight: $font-weight-bold;
     color: $text-black-color;
+    line-height: 100%;
 
     &.active {
         background-color: $primary-color;
