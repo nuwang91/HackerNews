@@ -4,6 +4,8 @@ import { forkJoin, Subscription } from 'rxjs';
 import { switchMap, take } from 'rxjs/operators';
 import { DataProviderService } from 'src/app/services/data-provider.service';
 import { NewsService } from 'src/app/services/news.service';
+import TimeAgo from 'javascript-time-ago';
+import en from 'javascript-time-ago/locale/en';
 
 type NewsType = "job" | "story" | "comment" | "poll" | "pollopt";
 
@@ -57,6 +59,8 @@ export class NewsComponent implements OnDestroy {
         this.setNewsType(params.type);
         this.getItems();
       });
+
+      TimeAgo.addDefaultLocale(en);
   }
 
   ngOnDestroy(): void {
@@ -83,7 +87,8 @@ export class NewsComponent implements OnDestroy {
   }
 
   getTime(time: number): string {
-    return time.toString();
+    const timeAgo = new TimeAgo('en-US');
+    return timeAgo.format(new Date(time * 1000)); // Multiplied by 1000 so that the argument is in milliseconds, not seconds.
   }
 
   private setNewsType(type: string): void {
