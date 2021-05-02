@@ -15,6 +15,17 @@
     width: 100%;
     @include display-flex;
     flex-flow: column;
+
+    .nav {
+        a {
+            margin-inline-end: $spacing-tiny;
+            text-decoration: none;
+        }
+        padding-inline-start: $spacing-small;
+        padding-inline-end: $spacing-small;
+        align-self: flex-start;
+        margin-block-end: $spacing-small;
+    }
 }
 
 .header {
