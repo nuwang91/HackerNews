@@ -1,0 +1,54 @@
+@import 'direction';
+
+@mixin display-flex() {
+  display: -webkit-flex;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+@mixin flex-direction($direction) {
+  -webkit-flex-direction: $direction;
+  -ms-flex-direction: $direction;
+  flex-direction: $direction;
+}
+
+@mixin flex-wrap($wrap) {
+  -webkit-flex-wrap: $wrap;
+  -ms-flex-wrap: $wrap;
+  flex-wrap: $wrap;
+}
+
+@mixin flex($params) {
+  -ms-flex: $params;
+  -webkit-flex: $params;
+  flex: $params;
+}
+
+@mixin text-overflow() {
+  overflow: hidden;
+  -ms-text-overflow: ellipsis;
+  -o-text-overflow: ellipsis;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+@mixin appearance($value: none) {
+  -webkit-appearance: $value;
+  -moz-appearance: $value;
+  appearance: $value;
+}
+
+@mixin spinner($width, $height, $borderSize: 4px, $color: $text-black-color, $background-color: $primary-color) {
+  border: $borderSize solid $background-color;
+  border-top: $borderSize solid $color;
+  border-radius: 50%;
+  width: $width;
+  height: $height;
+  animation: spin 2s linear infinite;
+
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+}

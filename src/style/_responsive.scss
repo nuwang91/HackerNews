@@ -1,0 +1,38 @@
+@import 'variables';
+
+/**
+ * Helper variables for media queries. Makes sure we use standard queries and not make up our own
+ */
+
+$screen: 'only screen' !default;
+
+$landscape: '#{$screen} and (orientation: landscape)' !default;
+$portrait: '#{$screen} and (orientation: portrait)' !default;
+
+$sm-range: (0, $layout-breakpoint-sm - 1px) !default;
+$md-range: ($layout-breakpoint-sm, $layout-breakpoint-md - 1px) !default;
+$lg-range: ($layout-breakpoint-md, $layout-breakpoint-lg - 1px) !default;
+$xl-range: ($layout-breakpoint-lg, $layout-breakpoint-xl - 1px) !default;
+
+$sm-up: $screen !default;
+$sm-only: '#{$screen} and (max-width: #{upper-bound($sm-range)})' !default;
+$sm-only-portrait: '#{$screen} and (max-width: #{upper-bound($sm-range)}) and (orientation: portrait)' !default;
+
+$md-up: '#{$screen} and (min-width:#{lower-bound($md-range)})' !default;
+$md-only: '#{$screen} and (min-width:#{lower-bound($md-range)}) and (max-width:#{upper-bound($md-range)})' !default;
+$md-down: '#{$screen} and (max-width:#{upper-bound($md-range)})' !default;
+
+$lg-up: '#{$screen} and (min-width:#{lower-bound($lg-range)})' !default;
+$lg-only: '#{$screen} and (min-width:#{lower-bound($lg-range)}) and (max-width:#{upper-bound($lg-range)})' !default;
+
+$xl-up: '#{$screen} and (min-width:#{lower-bound($xl-range)})' !default;
+$xl-only: '#{$screen} and (min-width:#{lower-bound($xl-range)}) and (max-width:#{upper-bound($xl-range)})' !default;
+
+$retina: (
+  '#{$screen} and (-webkit-min-device-pixel-ratio: 2)',
+  '#{$screen} and (min--moz-device-pixel-ratio: 2)',
+  '#{$screen} and (-o-min-device-pixel-ratio: 2/1)',
+  '#{$screen} and (min-device-pixel-ratio: 2)',
+  '#{$screen} and (min-resolution: 192dpi)',
+  '#{$screen} and (min-resolution: 2dppx)'
+);
