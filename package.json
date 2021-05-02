@@ -8,10 +8,13 @@
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "test-unit": "jest",
+    "test:watch": "jest --watch"
   },
   "jest": {
     "preset": "jest-preset-angular",
+    "modulePathIgnorePatterns": ["<rootDir>/src/test.ts"],
     "setupFilesAfterEnv": [
       "<rootDir>/setup-jest.ts"
     ]
