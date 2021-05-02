@@ -1,0 +1,24 @@
+@import '../../../../style/include';
+
+:host {
+    width: inherit;
+    flex: 1;
+    overflow-y: auto;
+    padding-inline-start: $spacing-small;
+    padding-inline-end: $spacing-small;
+    padding-block-start: $spacing-small;
+    padding-block-end: $spacing-small;
+}
+
+.news-container {
+    width: 100%;
+}
+
+.news-card-wrapper {
+    margin-block-end: 12px;
+
+    a {
+        text-decoration: none;
+    }
+}
+

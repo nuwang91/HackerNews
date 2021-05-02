@@ -1,0 +1,12 @@
+<div class="news-container">
+  <div class="news-card-wrapper" *ngFor="let item of newsItems">
+    <a [href]="item.url">
+      <app-card
+        [title]="item.title"
+        [body]="getBodyText(item.text)"
+        [time]="getTime(item.time)"
+        [comment]="getComments(item.descendants)"
+      ></app-card>
+    </a>
+  </div>
+</div>
