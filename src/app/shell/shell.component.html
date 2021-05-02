@@ -6,7 +6,10 @@
   </nav>
   <router-outlet></router-outlet>
   <div class="button-wrapper">
-    <button appButton (click)="loadMore()">Load More</button>
+    <button appButton (click)="loadMore()">
+      <div *ngIf="loading$ | async" class="spinner"></div>
+      Load More
+    </button>
   </div>
 </div>
 <div class="footer"></div>

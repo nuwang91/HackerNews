@@ -1,21 +1,26 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivationEnd, Router } from '@angular/router';
-import { Subscription } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { filter } from 'rxjs/operators';
+import { NewsService } from '../services/news.service';
 
 @Component({
   selector: 'app-shell',
   templateUrl: './shell.component.html',
   styleUrls: ['./shell.component.scss']
 })
-export class ShellComponent implements OnInit, OnDestroy {
+export class ShellComponent implements OnDestroy {
 
+  loading$: Observable<boolean> = this.newsService.loading$;
   newIsActive: boolean = false;
   bestIsActive: boolean = false;
 
   private _routerSubscription: Subscription;
 
-  constructor(private router: Router) {
+  constructor(
+    private router: Router,
+    private newsService: NewsService
+  ) {
 
     this._routerSubscription = this.router.events
       .pipe(filter((event: any) => event instanceof ActivationEnd))
@@ -33,9 +38,6 @@ export class ShellComponent implements OnInit, OnDestroy {
             break;
         }
       });
-   }
-
-  ngOnInit(): void {
   }
 
   ngOnDestroy(): void {
@@ -45,7 +47,7 @@ export class ShellComponent implements OnInit, OnDestroy {
   }
 
   loadMore(): void {
-    //
+    this.newsService.loadMoreNews();
   }
 
 }

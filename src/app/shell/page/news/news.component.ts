@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { forkJoin } from 'rxjs';
+import { forkJoin, Subscription } from 'rxjs';
 import { switchMap, take } from 'rxjs/operators';
 import { DataProviderService } from 'src/app/services/data-provider.service';
+import { NewsService } from 'src/app/services/news.service';
 
 type NewsType = "job" | "story" | "comment" | "poll" | "pollopt";
 
@@ -28,21 +29,43 @@ interface NewsItem {
   templateUrl: './news.component.html',
   styleUrls: ['./news.component.scss']
 })
-export class NewsComponent implements OnInit {
+export class NewsComponent implements OnDestroy {
 
   newsItems: Array<NewsItem> = [];
   dummyBody: string = 'Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, …when an unknown printer took a galley of type and scrambled';
 
   private _mainUrlType: string = '';
   private _top = 10;
+  private _loadMoreSubscription: Subscription;
+  private _routeSubscription: Subscription;
 
   constructor(
     private dataProviderService: DataProviderService,
-    private route: ActivatedRoute,) {
+    private route: ActivatedRoute,
+    private newsService: NewsService) {
+
+      this._loadMoreSubscription = this.newsService.loadMore$.subscribe(() => {
+        this.newsService.loading(true);
+        this._top += this._top;
+        this.getItems();
+      });
+
+      this._routeSubscription = this.route.params.subscribe((params) => {
+        this.resetTop();
+        this.newsItems = [];
+        this.newsService.loading(true);
+        this.setNewsType(params.type);
+        this.getItems();
+      });
   }
 
-  ngOnInit(): void {
-    this._listenToRouteChanges();
+  ngOnDestroy(): void {
+    if (this._loadMoreSubscription) {
+      this._loadMoreSubscription.unsubscribe();
+    }
+    if (this._routeSubscription) {
+      this._routeSubscription.unsubscribe();
+    }
   }
 
   getBodyText(text: string): string {
@@ -61,14 +84,6 @@ export class NewsComponent implements OnInit {
 
   getTime(time: number): string {
     return time.toString();
-  }
-
-  private _listenToRouteChanges(): void {
-    this.route.params.subscribe((params) => {
-      this.newsItems = [];
-      this.setNewsType(params.type);
-      this.getItems();
-    });
   }
 
   private setNewsType(type: string): void {
@@ -93,7 +108,12 @@ export class NewsComponent implements OnInit {
         })))
       ).pipe(take(1)).subscribe((items: any) => {
         this.newsItems = items;
+        this.newsService.loading(false);
       });
+  }
+
+  private resetTop(): void {
+    this._top = 10;
   }
 
 }

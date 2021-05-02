@@ -44,6 +44,11 @@
             background-color: $primary-color;
             line-height: 22px;
             color: #000000;
+
+            .spinner {
+                margin-inline-end: 4px;
+                @include spinner(20px, 20px, 2px, $text-black-color);
+            }
         }
     }
 }
