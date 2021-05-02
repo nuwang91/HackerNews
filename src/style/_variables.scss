@@ -4,3 +4,12 @@ $layout-breakpoint-sm: 600px !default;
 $layout-breakpoint-md: 960px !default;
 $layout-breakpoint-lg: 1280px !default;
 $layout-breakpoint-xl: 1920px !default;
+
+// Grid layout helper spacers
+$spacing-micro: (4px/$base-rem + rem) !default;
+$spacing-tiny: (8px/$base-rem + rem) !default;
+$spacing-small: (16px/$base-rem + rem) !default;
+$spacing-medium: (32px/$base-rem + rem) !default;
+$spacing-big: (48px/$base-rem + rem) !default;
+$spacing-large: (64px/$base-rem + rem) !default;
+$spacing-huge: (96px/$base-rem + rem) !default;
