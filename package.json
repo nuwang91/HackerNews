@@ -14,7 +14,9 @@
   },
   "jest": {
     "preset": "jest-preset-angular",
-    "modulePathIgnorePatterns": ["<rootDir>/src/test.ts"],
+    "modulePathIgnorePatterns": [
+      "<rootDir>/src/test.ts"
+    ],
     "setupFilesAfterEnv": [
       "<rootDir>/setup-jest.ts"
     ]
