@@ -50,4 +50,23 @@ export class ShellComponent implements OnDestroy {
     this.newsService.loadMoreNews();
   }
 
+  hasClickedLink(param: string): void {
+    switch (param) {
+      case 'new':
+        if(this.newIsActive){
+          this.router.navigateByUrl('');
+          this.newIsActive = false;
+        }
+        break;
+      case 'best':
+        if(this.bestIsActive){
+          this.router.navigateByUrl('');
+          this.bestIsActive = false;
+        }
+        break;
+      default:
+        break;
+    }
+  }
+
 }
