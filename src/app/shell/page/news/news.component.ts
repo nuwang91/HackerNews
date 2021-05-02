@@ -42,22 +42,22 @@ export class NewsComponent implements OnDestroy {
   private _routeSubscription: Subscription;
 
   constructor(
-    private dataProviderService: DataProviderService,
-    private route: ActivatedRoute,
-    private newsService: NewsService) {
+    private _dataProviderService: DataProviderService,
+    private _route: ActivatedRoute,
+    private _newsService: NewsService) {
 
-      this._loadMoreSubscription = this.newsService.loadMore$.subscribe(() => {
-        this.newsService.loading(true);
+      this._loadMoreSubscription = this._newsService.loadMore$.subscribe(() => {
+        this._newsService.loading(true);
         this._top += this._top;
-        this.getItems();
+        this._getItems();
       });
 
-      this._routeSubscription = this.route.params.subscribe((params) => {
-        this.resetTop();
+      this._routeSubscription = this._route.params.subscribe((params) => {
+        this._resetTop();
         this.newsItems = [];
-        this.newsService.loading(true);
-        this.setNewsType(params.type);
-        this.getItems();
+        this._newsService.loading(true);
+        this._setNewsType(params.type);
+        this._getItems();
       });
 
       TimeAgo.addDefaultLocale(en);
@@ -91,7 +91,7 @@ export class NewsComponent implements OnDestroy {
     return timeAgo.format(new Date(time * 1000)); // Multiplied by 1000 so that the argument is in milliseconds, not seconds.
   }
 
-  private setNewsType(type: string): void {
+  private _setNewsType(type: string): void {
     switch (type) {
       case 'new':
         this._mainUrlType = 'newstories';
@@ -105,19 +105,19 @@ export class NewsComponent implements OnDestroy {
     }
   }
 
-  private getItems(): void {
-    this.dataProviderService.getData(this._mainUrlType, `?orderBy="$key"&limitToFirst=${this._top}`)
+  private _getItems(): void {
+    this._dataProviderService.getData(this._mainUrlType, `?orderBy="$key"&limitToFirst=${this._top}`)
       .pipe(
         switchMap((ids) => forkJoin(ids.map((id: number) => {
-          return this.dataProviderService.getData('item/' + id).pipe(take(1));
+          return this._dataProviderService.getData('item/' + id).pipe(take(1));
         })))
       ).pipe(take(1)).subscribe((items: any) => {
         this.newsItems = items;
-        this.newsService.loading(false);
+        this._newsService.loading(false);
       });
   }
 
-  private resetTop(): void {
+  private _resetTop(): void {
     this._top = 10;
   }
 

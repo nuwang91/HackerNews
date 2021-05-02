@@ -1,19 +1,14 @@
-import { Component, HostBinding, Input, OnInit } from '@angular/core';
+import { Component, HostBinding, Input } from '@angular/core';
 
 @Component({
   selector: '[appNavItem]',
   templateUrl: './nav-item.component.html',
   styleUrls: ['./nav-item.component.scss']
 })
-export class NavItemComponent implements OnInit {
+export class NavItemComponent {
 
   @HostBinding('class.active')
   @Input()
   active: boolean =  false;
-
-  constructor() { }
-
-  ngOnInit(): void {
-  }
 
 }

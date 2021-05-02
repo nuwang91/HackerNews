@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges, OnInit, SecurityContext, SimpleChanges } from '@angular/core';
+import { Component, Input, OnChanges, SecurityContext, SimpleChanges } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
@@ -6,7 +6,7 @@ import { DomSanitizer } from '@angular/platform-browser';
   templateUrl: './card.component.html',
   styleUrls: ['./card.component.scss']
 })
-export class CardComponent implements OnInit, OnChanges {
+export class CardComponent implements OnChanges {
 
   @Input()
   title: string = '';
@@ -20,14 +20,11 @@ export class CardComponent implements OnInit, OnChanges {
   @Input()
   comment: string = '';
   
-  constructor(private domSanitizer: DomSanitizer) { }
-
-  ngOnInit(): void {
-  }
+  constructor(private _domSanitizer: DomSanitizer) { }
 
   ngOnChanges(changes: SimpleChanges): void {
     if(changes.body) {
-      this.body = this.domSanitizer.sanitize(SecurityContext.HTML, this.body) as string;
+      this.body = this._domSanitizer.sanitize(SecurityContext.HTML, this.body) as string;
     }
   }
 

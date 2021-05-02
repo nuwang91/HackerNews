@@ -10,9 +10,9 @@ export class DataProviderService {
 
   private API_URL = environment.API_URL;
 
-  constructor(private http: HttpClient) { }
+  constructor(private _http: HttpClient) { }
   
   public getData(url: string, param: string = ''): Observable<any> {
-    return this.http.get(`${this.API_URL}/${url}.json${param}`);
+    return this._http.get(`${this.API_URL}/${url}.json${param}`);
   }
 }

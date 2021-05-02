@@ -11,18 +11,18 @@ import { NewsService } from '../services/news.service';
 })
 export class ShellComponent implements OnDestroy {
 
-  loading$: Observable<boolean> = this.newsService.loading$;
+  loading$: Observable<boolean> = this._newsService.loading$;
   newIsActive: boolean = false;
   bestIsActive: boolean = false;
 
   private _routerSubscription: Subscription;
 
   constructor(
-    private router: Router,
-    private newsService: NewsService
+    private _router: Router,
+    private _newsService: NewsService
   ) {
 
-    this._routerSubscription = this.router.events
+    this._routerSubscription = this._router.events
       .pipe(filter((event: any) => event instanceof ActivationEnd))
       .subscribe((event: ActivationEnd) => {
         switch (event.snapshot.params.type) {
@@ -47,20 +47,20 @@ export class ShellComponent implements OnDestroy {
   }
 
   loadMore(): void {
-    this.newsService.loadMoreNews();
+    this._newsService.loadMoreNews();
   }
 
   hasClickedLink(param: string): void {
     switch (param) {
       case 'new':
         if(this.newIsActive){
-          this.router.navigateByUrl('');
+          this._router.navigateByUrl('');
           this.newIsActive = false;
         }
         break;
       case 'best':
         if(this.bestIsActive){
-          this.router.navigateByUrl('');
+          this._router.navigateByUrl('');
           this.bestIsActive = false;
         }
         break;
