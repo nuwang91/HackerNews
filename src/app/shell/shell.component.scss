@@ -26,6 +26,26 @@
         align-self: flex-start;
         margin-block-end: $spacing-small;
     }
+
+    .button-wrapper {
+        margin-block-start: $spacing-small;
+        padding-inline-start: $spacing-small;
+        padding-inline-end: $spacing-small;
+        position: relative;
+    
+        button {
+            align-self: flex-end; 
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: $border-radius;
+            height: $spacing-big;
+            font-weight: $font-weight-bold;
+            background-color: $primary-color;
+            line-height: 22px;
+            color: #000000;
+        }
+    }
 }
 
 .header {
