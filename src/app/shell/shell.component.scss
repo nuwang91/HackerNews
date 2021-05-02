@@ -1,122 +1,130 @@
-@import '../../style/include';
+@import "../../style/include";
 
-$shell-button-line-height: (22px/$base-rem + rem);
+$shell-button-line-height: (22px / $base-rem + rem);
 
 :host {
-    height: inherit;
-    width: inherit;
-    @include display-flex;
-    @include flex-wrap(wrap);
-    overflow: hidden;
+  height: inherit;
+  width: inherit;
+  @include display-flex;
+  @include flex-wrap(wrap);
+  overflow: hidden;
 }
 
 .container {
-    padding-block-start: $spacing-small;
-    padding-block-end: $spacing-small;
-    height: calc(100% - #{$footer-height} - #{$header-height});
-    width: 100%;
-    @include display-flex;
-    flex-flow: column;
-
-    .nav {
-        a {
-            margin-inline-end: $spacing-tiny;
-            text-decoration: none;
-        }
-        padding-inline-start: $spacing-small;
-        padding-inline-end: $spacing-small;
-        align-self: flex-start;
-        margin-block-end: $spacing-small;
+  padding-block-start: $spacing-small;
+  padding-block-end: $spacing-small;
+  height: calc(100% - #{$footer-height} - #{$header-height});
+  @media #{$md-only} {
+    @media #{$landscape} {
+      height: calc(100% - #{$header-height});
     }
+  }
 
-    .button-wrapper {
-        margin-block-start: $spacing-small;
-        padding-inline-start: $spacing-small;
-        padding-inline-end: $spacing-small;
-        position: relative;
-    
-        button {
-            align-self: flex-end; 
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            border-radius: $border-radius;
-            height: $spacing-big;
-            font-weight: $font-weight-bold;
-            background-color: $primary-color;
-            line-height: $shell-button-line-height;
-            color: #000000;
+  width: 100%;
+  @include display-flex;
+  flex-flow: column;
 
-            .spinner {
-                margin-inline-end: 4px;
-                @include spinner(20px, 20px, 2px, $text-black-color);
-            }
-        }
+  .nav {
+    a {
+      margin-inline-end: $spacing-tiny;
+      text-decoration: none;
     }
+    padding-inline-start: $spacing-small;
+    padding-inline-end: $spacing-small;
+    align-self: flex-start;
+    margin-block-end: $spacing-small;
+  }
+
+  .button-wrapper {
+    margin-block-start: $spacing-small;
+    padding-inline-start: $spacing-small;
+    padding-inline-end: $spacing-small;
+    position: relative;
+
+    button {
+      align-self: flex-end;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: $border-radius;
+      height: $spacing-big;
+      font-weight: $font-weight-bold;
+      background-color: $primary-color;
+      line-height: $shell-button-line-height;
+      color: #000000;
+
+      .spinner {
+        margin-inline-end: 4px;
+        @include spinner(20px, 20px, 2px, $text-black-color);
+      }
+    }
+  }
 }
 
 .header {
-    @media #{$sm-only} {
-        width: 100%;
-        height: $header-height;
-        background-color: #FFFFFF;
-        position: relative;
-        align-self: flex-start;
-        box-shadow: $box-shadow;
+  width: 100%;
+  height: $header-height;
+  background-color: #ffffff;
+  position: relative;
+  align-self: flex-start;
+  box-shadow: $box-shadow;
 
-        &::after {
-            content: ' ';
-            position: absolute;
-            z-index: 0;
-            left: 0;
-            right: 0;
-            margin: auto;
-            top: 0;
-            bottom: 0;
-            background-position: center;
-            background-repeat: no-repeat;
-            background-image: url(../../images/logo/hackernews_colored.svg);
-        }
-    }
+  &::after {
+    content: " ";
+    position: absolute;
+    z-index: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    top: 0;
+    bottom: 0;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-image: url(../../images/logo/hackernews_colored.svg);
+  }
 }
 
 .overlay {
-    position: absolute;
-    top: $header-height;
-    bottom: $footer-height;
-    background-color: $secondary-color;
-    opacity: 0.7;
-    z-index: 999;
-    width: 100%;
-    display: flex;
+  position: absolute;
+  top: $header-height;
+  bottom: $footer-height;
+  background-color: $secondary-color;
+  opacity: 0.7;
+  z-index: 999;
+  width: 100%;
+  display: flex;
 
-    .spinner {
-        @include spinner(40px, 40px, 4px, $text-black-color);
-        z-index: 1000;
-        margin: auto;
-    }
+  .spinner {
+    @include spinner(40px, 40px, 4px, $text-black-color);
+    z-index: 1000;
+    margin: auto;
+  }
 }
 
 .footer {
-    @media #{$sm-only} {
-        width: 100%;
-        height: $footer-height;
-        background-color: $primary-color;
-        position: relative;
-        align-self: flex-end;
-
-        &::after {
-            content: ' ';
-            position: absolute;
-            z-index: 0;
-            left: 0;
-            right: 0;
-            margin: auto;
-            top: 0;
-            bottom: 0;
-            background-position: center;
-            background-repeat: no-repeat;
-            background-image: url(../../images/logo/hackernews_dark.svg);
-        }
+  @media #{$md-only} {
+    @media #{$landscape} {
+      display: none;
     }
+  }
+
+  width: 100%;
+  height: $footer-height;
+  background-color: $primary-color;
+  position: relative;
+  align-self: flex-end;
+
+  &::after {
+    content: " ";
+    position: absolute;
+    z-index: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    top: 0;
+    bottom: 0;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-image: url(../../images/logo/hackernews_dark.svg);
+  }
 }

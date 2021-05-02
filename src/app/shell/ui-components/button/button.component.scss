@@ -1,15 +1,15 @@
-@import '../../../../style/include';
+@import "../../../../style/include";
 
-:host{
-    background-color: inherit;
-    @include appearance;
-    outline: none;
-    border: none;
-    font: inherit;
-    border-radius: inherit;
-    height: inherit;
-    font-weight: inherit;
-    line-height: inherit;
-    width: 100%;
-    color: inherit;
+:host {
+  background-color: inherit;
+  @include appearance;
+  outline: none;
+  border: none;
+  font: inherit;
+  border-radius: inherit;
+  height: inherit;
+  font-weight: inherit;
+  line-height: inherit;
+  width: 100%;
+  color: inherit;
 }

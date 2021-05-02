@@ -1,77 +1,77 @@
-@import '../../../../style/include';
+@import "../../../../style/include";
 
 //Changed the odd pixel to even number - Original was 123px
-$card-height: (124px/$base-rem + rem);
+$card-height: (124px / $base-rem + rem);
 
-$card-body-height: (44px/$base-rem + rem);
+$card-body-height: (44px / $base-rem + rem);
 
 $card-title-line-height: $spacing-small;
-$card-body-line-height: (14px/$base-rem + rem);
-$card-meta-line-height: (11px/$base-rem + rem);
+$card-body-line-height: (14px / $base-rem + rem);
+$card-meta-line-height: (11px / $base-rem + rem);
 
-$card-title-margin-block: (4px/$base-rem + rem);
+$card-title-margin-block: (4px / $base-rem + rem);
 
-$card-line-margin-inline: (6px/$base-rem + rem);
+$card-line-margin-inline: (6px / $base-rem + rem);
 
-$card-clock-margin-inline: (3px/$base-rem + rem);
-$card-clock-size: (10px/$base-rem + rem);
+$card-clock-margin-inline: (3px / $base-rem + rem);
+$card-clock-size: (10px / $base-rem + rem);
 
 .card-container {
-    height: $card-height;
-    background-color: #FFFFFF;
-    box-shadow: $box-shadow;
-    border-radius: $border-radius;
-    padding: $spacing-small;
+  height: $card-height;
+  background-color: #ffffff;
+  box-shadow: $box-shadow;
+  border-radius: $border-radius;
+  padding: $spacing-small;
+  @include display-flex;
+  @include flex-wrap(wrap);
+
+  .title {
+    font-weight: $font-weight-bold;
+    font-size: 12px;
+    line-height: $card-title-line-height;
+    margin-block-end: $card-title-margin-block;
+    color: $text-black-color;
+  }
+
+  .body {
+    height: $card-body-height;
+    font-weight: $font-weight-normal;
+    font-size: 10px;
+    line-height: $card-body-line-height;
+    color: $text-black-color;
+    @include text-overflow();
+  }
+
+  .meta {
     @include display-flex;
-    @include flex-wrap(wrap);
 
-
-    .title {
-        font-weight: $font-weight-bold;
-        font-size: 12px;
-        line-height: $card-title-line-height;
-        margin-block-end: $card-title-margin-block;
-        color: $text-black-color;
+    .clock {
+      align-self: center;
+      width: $card-clock-size;
+      height: $card-clock-size;
+      margin-inline-end: $card-clock-margin-inline;
+      background-repeat: no-repeat;
+      background-size: contain;
+      background-position-y: center;
+      background-image: url(../../../../images/icon/clock.svg);
     }
 
-    .body {
-        height: $card-body-height;
-        font-weight: $font-weight-normal;
-        font-size: 10px;
-        line-height: $card-body-line-height;
-        color: $text-black-color;
-        @include text-overflow();
+    .line {
+      margin-inline-start: $card-line-margin-inline;
+      margin-inline-end: $card-line-margin-inline;
+      width: 1px;
+      background-repeat: no-repeat;
+      background-size: contain;
+      background-position-y: center;
+      background-image: url(../../../../images/icon/line.svg);
     }
 
-    .meta {
-        @include display-flex;
-
-        .clock {
-            align-self: center;
-            width: $card-clock-size;
-            height: $card-clock-size;
-            margin-inline-end: $card-clock-margin-inline;
-            background-repeat: no-repeat;
-            background-size: contain;
-            background-position-y: center;
-            background-image: url(../../../../images/icon/clock.svg);
-        }
-
-        .line {
-            margin-inline-start: $card-line-margin-inline;
-            margin-inline-end: $card-line-margin-inline;
-            width: 1px;
-            background-repeat: no-repeat;
-            background-size: contain;
-            background-position-y: center;
-            background-image: url(../../../../images/icon/line.svg);
-        }
-
-        .time, .comment {
-            font-size: 8px;
-            line-height: $card-meta-line-height;
-            color: $text-grey-color;
-            align-self: center;
-        }
+    .time,
+    .comment {
+      font-size: 8px;
+      line-height: $card-meta-line-height;
+      color: $text-grey-color;
+      align-self: center;
     }
+  }
 }

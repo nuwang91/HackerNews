@@ -1,26 +1,25 @@
-@import '../../../../style/include';
+@import "../../../../style/include";
 
-$news-margin-block: (12px/$base-rem + rem);
+$news-margin-block: (12px / $base-rem + rem);
 
 :host {
-    width: inherit;
-    flex: 1;
-    overflow-y: auto;
-    padding-inline-start: $spacing-small;
-    padding-inline-end: $spacing-small;
-    padding-block-start: $spacing-small;
-    padding-block-end: $spacing-small;
+  width: inherit;
+  flex: 1;
+  overflow-y: auto;
+  padding-inline-start: $spacing-small;
+  padding-inline-end: $spacing-small;
+  padding-block-start: $spacing-small;
+  padding-block-end: $spacing-small;
 }
 
 .news-container {
-    width: 100%;
+  width: 100%;
 }
 
 .news-card-wrapper {
-    margin-block-end: $news-margin-block;
+  margin-block-end: $news-margin-block;
 
-    a {
-        text-decoration: none;
-    }
+  a {
+    text-decoration: none;
+  }
 }
-
