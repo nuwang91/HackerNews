@@ -1,9 +1,10 @@
 <div class="header"></div>
 <div class="container">
   <nav class="nav">
-    <a appNavItem>New</a>
-    <a appNavItem>Best</a>
+    <a appNavItem [active]="newIsActive" routerLink="/news/new">New</a>
+    <a appNavItem [active]="bestIsActive" routerLink="/news/best">Best</a>
   </nav>
+  <router-outlet></router-outlet>
   <div class="button-wrapper">
     <button appButton (click)="loadMore()">Load More</button>
   </div>
