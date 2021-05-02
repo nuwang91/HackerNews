@@ -1,3 +1,4 @@
+// Use rem for all dimensions of elements and use base font size as 16px
 $base-rem: 16px !default;
 
 $layout-breakpoint-sm: 600px !default;
@@ -13,3 +14,10 @@ $spacing-medium: (32px/$base-rem + rem) !default;
 $spacing-big: (48px/$base-rem + rem) !default;
 $spacing-large: (64px/$base-rem + rem) !default;
 $spacing-huge: (96px/$base-rem + rem) !default;
+
+// Reusable style properties
+$box-shadow: 0px (3px/$base-rem + rem) (28px/$base-rem + rem) rgba(0, 0, 0, 0.08);
+
+// Its not recommended to have odd pixel dimensions, therefore rounded it to have even numbers (Grid Layout)
+$header-height: (50px/$base-rem + rem) !default; // Originally 51
+$footer-height: (100px/$base-rem + rem) !default; // Originally 99
