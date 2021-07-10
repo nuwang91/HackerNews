@@ -5,6 +5,8 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 This is a pet project done to demonstrate the use hacker news API along with Angular Framework as fronend.
 The code base only covered a scenario where news were read from a mobile device.
 
+Stackblitz - https://stackblitz.com/github/nuwang91/HackerNews
+
 ## Prerequisites
 
 - Node
