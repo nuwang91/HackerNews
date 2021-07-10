@@ -2,8 +2,8 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { forkJoin, Subscription } from 'rxjs';
 import { switchMap, take } from 'rxjs/operators';
-import { DataProviderService } from 'src/app/services/data-provider.service';
-import { NewsService } from 'src/app/services/news.service';
+import { DataProviderService } from '../../../services/data-provider.service';
+import { NewsService } from '../../../services/news.service';
 import TimeAgo from 'javascript-time-ago';
 import en from 'javascript-time-ago/locale/en';
 

@@ -1,8 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ActivatedRoute } from '@angular/router';
 import { of } from 'rxjs';
-import { DataProviderService } from 'src/app/services/data-provider.service';
-import { NewsService } from 'src/app/services/news.service';
+import { DataProviderService } from '../../../services/data-provider.service';
+import { NewsService } from '../../../services/news.service';
 import { CardComponent } from '../../ui-components/card/card.component';
 import { NewsComponent } from './news.component';
 
