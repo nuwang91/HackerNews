@@ -7,7 +7,7 @@ import { NewsService } from '../../../services/news.service';
 import TimeAgo from 'javascript-time-ago';
 import en from 'javascript-time-ago/locale/en';
 
-type NewsType = "job" | "story" | "comment" | "poll" | "pollopt";
+type NewsType = 'job' | 'story' | 'comment' | 'poll' | 'pollopt';
 
 interface NewsItem {
   id: number;
@@ -34,9 +34,10 @@ interface NewsItem {
 export class NewsComponent implements OnDestroy {
 
   newsItems: Array<NewsItem> = [];
-  dummyBody: string = 'Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, …when an unknown printer took a galley of type and scrambled';
+  dummyBody = 'Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, ' +
+    '…when an unknown printer took a galley of type and scrambled';
 
-  private _mainUrlType: string = '';
+  private _mainUrlType = '';
   private _top = 10;
   private _loadMoreSubscription: Subscription;
   private _routeSubscription: Subscription;
@@ -107,9 +108,7 @@ export class NewsComponent implements OnDestroy {
   private _getItems(): void {
     this._dataProviderService.getData(this._mainUrlType, `?orderBy="$key"&limitToFirst=${this._top}`)
       .pipe(
-        switchMap((ids) => forkJoin(ids.map((id: number) => {
-          return this._dataProviderService.getData('item/' + id).pipe(take(1));
-        })))
+        switchMap((ids) => forkJoin(ids.map((id: number) => this._dataProviderService.getData('item/' + id).pipe(take(1)))))
       ).pipe(take(1)).subscribe((items: any) => {
         this.newsItems = items;
         this._newsService.loading(false);

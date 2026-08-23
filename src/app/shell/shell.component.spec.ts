@@ -11,7 +11,7 @@ describe('ShellComponent', () => {
 
   const mockRouter: Partial<Router> = {
     events: of()
-  }
+  };
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({

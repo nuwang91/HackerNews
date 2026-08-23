@@ -9,17 +9,17 @@ import { DomSanitizer } from '@angular/platform-browser';
 export class CardComponent implements OnChanges {
 
   @Input()
-  title: string = '';
+  title = '';
 
   @Input()
-  body: string = '';
+  body = '';
 
   @Input()
-  time: string = '';
+  time = '';
 
   @Input()
-  comment: string = '';
-  
+  comment = '';
+
   constructor(private _domSanitizer: DomSanitizer) { }
 
   ngOnChanges(changes: SimpleChanges): void {

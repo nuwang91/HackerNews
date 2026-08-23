@@ -12,8 +12,8 @@ import { NewsService } from '../services/news.service';
 export class ShellComponent implements OnDestroy {
 
   loading$: Observable<boolean> = this._newsService.loading$;
-  newIsActive: boolean = false;
-  bestIsActive: boolean = false;
+  newIsActive = false;
+  bestIsActive = false;
 
   private _overlay$: Subject<boolean> = new Subject<boolean>();
   overlay$: Observable<boolean> = this._overlay$.asObservable();

@@ -6,7 +6,7 @@ import { DataProviderService } from './data-provider.service';
 describe('DataProviderService', () => {
   let service: DataProviderService;
 
-  const mockHttpClient: Partial<HttpClient> = {}
+  const mockHttpClient: Partial<HttpClient> = {};
 
   beforeEach(() => {
     TestBed.configureTestingModule({
