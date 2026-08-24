@@ -1,4 +1,4 @@
-import { ApplicationRef, ChangeDetectorRef, Component, OnDestroy } from '@angular/core';
+import { ApplicationRef, ChangeDetectorRef, Component, OnDestroy, ChangeDetectionStrategy } from '@angular/core';
 import { ActivationEnd, NavigationEnd, NavigationStart, Router } from '@angular/router';
 import { combineLatest, Observable, Subject, Subscription } from 'rxjs';
 import { filter } from 'rxjs/operators';
@@ -7,13 +7,15 @@ import { NewsService } from '../services/news.service';
 @Component({
   selector: 'app-shell',
   templateUrl: './shell.component.html',
-  styleUrls: ['./shell.component.scss']
+  styleUrls: ['./shell.component.scss'],
+  changeDetection: ChangeDetectionStrategy.Eager,
+  standalone: false
 })
 export class ShellComponent implements OnDestroy {
 
   loading$: Observable<boolean> = this._newsService.loading$;
-  newIsActive: boolean = false;
-  bestIsActive: boolean = false;
+  newIsActive = false;
+  bestIsActive = false;
 
   private _overlay$: Subject<boolean> = new Subject<boolean>();
   overlay$: Observable<boolean> = this._overlay$.asObservable();

@@ -11,7 +11,7 @@ export class NewsService {
 
   private _loading$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   loading$: Observable<boolean> = this._loading$.asObservable();
-  
+
   constructor() { }
 
   loadMoreNews(): void {
