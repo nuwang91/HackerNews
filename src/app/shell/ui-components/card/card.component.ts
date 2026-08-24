@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges, SecurityContext, SimpleChanges, ChangeDetectionStrategy, inject } from '@angular/core';
+import { Component, SecurityContext, ChangeDetectionStrategy, computed, inject, input } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
@@ -7,25 +7,13 @@ import { DomSanitizer } from '@angular/platform-browser';
   styleUrls: ['./card.component.scss'],
   changeDetection: ChangeDetectionStrategy.Eager
 })
-export class CardComponent implements OnChanges {
+export class CardComponent {
   private _domSanitizer = inject(DomSanitizer);
 
-  @Input()
-  title = '';
+  readonly title = input('');
+  readonly body = input('');
+  readonly time = input('');
+  readonly comment = input('');
 
-  @Input()
-  body = '';
-
-  @Input()
-  time = '';
-
-  @Input()
-  comment = '';
-
-  ngOnChanges(changes: SimpleChanges): void {
-    if(changes.body) {
-      this.body = this._domSanitizer.sanitize(SecurityContext.HTML, this.body) as string;
-    }
-  }
-
+  readonly sanitizedBody = computed(() => this._domSanitizer.sanitize(SecurityContext.HTML, this.body()) as string);
 }
