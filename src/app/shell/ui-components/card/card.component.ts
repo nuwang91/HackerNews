@@ -5,7 +5,7 @@ import { DomSanitizer } from '@angular/platform-browser';
   selector: 'app-card',
   templateUrl: './card.component.html',
   styleUrls: ['./card.component.scss'],
-  changeDetection: ChangeDetectionStrategy.Eager
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CardComponent {
   private _domSanitizer = inject(DomSanitizer);

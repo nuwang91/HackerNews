@@ -1,4 +1,4 @@
-import { Component, OnDestroy, ChangeDetectionStrategy, inject } from '@angular/core';
+import { ChangeDetectorRef, Component, OnDestroy, ChangeDetectionStrategy, inject } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { EMPTY, forkJoin, Subscription } from 'rxjs';
 import { catchError, finalize, switchMap, take } from 'rxjs/operators';
@@ -31,13 +31,14 @@ interface NewsItem {
   selector: 'app-news',
   templateUrl: './news.component.html',
   styleUrls: ['./news.component.scss'],
-  changeDetection: ChangeDetectionStrategy.Eager,
+  changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [CardComponent]
 })
 export class NewsComponent implements OnDestroy {
   private _dataProviderService = inject(DataProviderService);
   private _route = inject(ActivatedRoute);
   private _newsService = inject(NewsService);
+  private _changeDetectorRef = inject(ChangeDetectorRef);
 
   newsItems: NewsItem[] = [];
   dummyBody = 'Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, ' +
@@ -59,6 +60,7 @@ export class NewsComponent implements OnDestroy {
       this._routeSubscription = this._route.params.subscribe((params) => {
         this._resetTop();
         this.newsItems = [];
+        this._changeDetectorRef.markForCheck();
         this._setNewsType(params.type);
         this._getItems();
       });
@@ -120,6 +122,7 @@ export class NewsComponent implements OnDestroy {
         finalize(() => this._newsService.loading(false))
       ).subscribe((items: any) => {
         this.newsItems = items;
+        this._changeDetectorRef.markForCheck();
       });
   }
 

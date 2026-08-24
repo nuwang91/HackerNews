@@ -24,7 +24,6 @@ module.exports = defineConfig([
       'prefer-arrow': preferArrow
     },
     rules: {
-      '@angular-eslint/prefer-on-push-component-change-detection': 'off',
       '@angular-eslint/component-selector': [
         'error',
         {

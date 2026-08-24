@@ -5,7 +5,7 @@ import { Component, ChangeDetectionStrategy } from '@angular/core';
   selector: '[appButton]',
   templateUrl: './button.component.html',
   styleUrls: ['./button.component.scss'],
-  changeDetection: ChangeDetectionStrategy.Eager
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ButtonComponent {
 

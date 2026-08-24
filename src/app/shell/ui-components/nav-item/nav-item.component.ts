@@ -5,7 +5,7 @@ import { Component, ChangeDetectionStrategy, input } from '@angular/core';
   selector: '[appNavItem]',
   templateUrl: './nav-item.component.html',
   styleUrls: ['./nav-item.component.scss'],
-  changeDetection: ChangeDetectionStrategy.Eager,
+  changeDetection: ChangeDetectionStrategy.OnPush,
   host: {
     '[class.active]': 'active()'
   }

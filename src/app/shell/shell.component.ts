@@ -11,7 +11,7 @@ import { AsyncPipe } from '@angular/common';
   selector: 'app-shell',
   templateUrl: './shell.component.html',
   styleUrls: ['./shell.component.scss'],
-  changeDetection: ChangeDetectionStrategy.Eager,
+  changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [NavItemComponent, RouterLink, RouterOutlet, ButtonComponent, AsyncPipe]
 })
 export class ShellComponent implements OnDestroy {
@@ -47,6 +47,7 @@ export class ShellComponent implements OnDestroy {
           default:
             break;
         }
+        this._changeDetectorRef.markForCheck();
       });
 
     this._overlaySubscription = combineLatest([
