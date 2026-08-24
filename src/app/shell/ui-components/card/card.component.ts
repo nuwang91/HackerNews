@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges, SecurityContext, SimpleChanges, ChangeDetectionStrategy } from '@angular/core';
+import { Component, Input, OnChanges, SecurityContext, SimpleChanges, ChangeDetectionStrategy, inject } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
@@ -9,6 +9,7 @@ import { DomSanitizer } from '@angular/platform-browser';
   standalone: false
 })
 export class CardComponent implements OnChanges {
+  private _domSanitizer = inject(DomSanitizer);
 
   @Input()
   title = '';
@@ -21,8 +22,6 @@ export class CardComponent implements OnChanges {
 
   @Input()
   comment = '';
-
-  constructor(private _domSanitizer: DomSanitizer) { }
 
   ngOnChanges(changes: SimpleChanges): void {
     if(changes.body) {

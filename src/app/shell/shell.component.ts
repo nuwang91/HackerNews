@@ -1,4 +1,4 @@
-import { ApplicationRef, ChangeDetectorRef, Component, OnDestroy, ChangeDetectionStrategy } from '@angular/core';
+import { ApplicationRef, ChangeDetectorRef, Component, OnDestroy, ChangeDetectionStrategy, inject } from '@angular/core';
 import { ActivationEnd, NavigationEnd, NavigationStart, Router } from '@angular/router';
 import { combineLatest, Observable, Subject, Subscription } from 'rxjs';
 import { filter } from 'rxjs/operators';
@@ -12,6 +12,10 @@ import { NewsService } from '../services/news.service';
   standalone: false
 })
 export class ShellComponent implements OnDestroy {
+  private _router = inject(Router);
+  private _newsService = inject(NewsService);
+  private _applicationRef = inject(ApplicationRef);
+  private _changeDetectorRef = inject(ChangeDetectorRef);
 
   loading$: Observable<boolean> = this._newsService.loading$;
   newIsActive = false;
@@ -23,12 +27,7 @@ export class ShellComponent implements OnDestroy {
   private _routerSubscription: Subscription;
   private _overlaySubscription: Subscription;
 
-  constructor(
-    private _router: Router,
-    private _newsService: NewsService,
-    private _applicationRef: ApplicationRef,
-    private _changeDetectorRef: ChangeDetectorRef
-  ) {
+  constructor() {
 
     this._routerSubscription = this._router.events
       .pipe(filter((event: any) => event instanceof ActivationEnd))

@@ -1,4 +1,4 @@
-import { Component, OnDestroy, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnDestroy, ChangeDetectionStrategy, inject } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { EMPTY, forkJoin, Subscription } from 'rxjs';
 import { catchError, finalize, switchMap, take } from 'rxjs/operators';
@@ -34,6 +34,9 @@ interface NewsItem {
   standalone: false
 })
 export class NewsComponent implements OnDestroy {
+  private _dataProviderService = inject(DataProviderService);
+  private _route = inject(ActivatedRoute);
+  private _newsService = inject(NewsService);
 
   newsItems: NewsItem[] = [];
   dummyBody = 'Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, ' +
@@ -44,10 +47,7 @@ export class NewsComponent implements OnDestroy {
   private _loadMoreSubscription: Subscription;
   private _routeSubscription: Subscription;
 
-  constructor(
-    private _dataProviderService: DataProviderService,
-    private _route: ActivatedRoute,
-    private _newsService: NewsService) {
+  constructor() {
 
       this._loadMoreSubscription = this._newsService.loadMore$.subscribe(() => {
         this._newsService.loading(true);
