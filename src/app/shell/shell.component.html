@@ -7,12 +7,16 @@
   <router-outlet></router-outlet>
   <div class="button-wrapper">
     <button appButton (click)="loadMore()">
-      <div *ngIf="loading$ | async" class="spinner"></div>
+      @if (loading$ | async) {
+        <div class="spinner"></div>
+      }
       Load More
     </button>
   </div>
 </div>
-<div *ngIf="overlay$ | async" class="overlay">
-  <div class="spinner"></div>
-</div>
+@if (overlay$ | async) {
+  <div class="overlay">
+    <div class="spinner"></div>
+  </div>
+}
 <div class="footer"></div>
