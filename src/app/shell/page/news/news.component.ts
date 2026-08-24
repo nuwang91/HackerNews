@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, ChangeDetectionStrategy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { forkJoin, Subscription } from 'rxjs';
 import { switchMap, take } from 'rxjs/operators';
@@ -30,11 +30,12 @@ interface NewsItem {
   selector: 'app-news',
   templateUrl: './news.component.html',
   styleUrls: ['./news.component.scss'],
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false
 })
 export class NewsComponent implements OnDestroy {
 
-  newsItems: Array<NewsItem> = [];
+  newsItems: NewsItem[] = [];
   dummyBody = 'Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, ' +
     '…when an unknown printer took a galley of type and scrambled';
 

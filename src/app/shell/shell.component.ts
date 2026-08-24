@@ -1,4 +1,4 @@
-import { ApplicationRef, ChangeDetectorRef, Component, OnDestroy } from '@angular/core';
+import { ApplicationRef, ChangeDetectorRef, Component, OnDestroy, ChangeDetectionStrategy } from '@angular/core';
 import { ActivationEnd, NavigationEnd, NavigationStart, Router } from '@angular/router';
 import { combineLatest, Observable, Subject, Subscription } from 'rxjs';
 import { filter } from 'rxjs/operators';
@@ -8,6 +8,7 @@ import { NewsService } from '../services/news.service';
   selector: 'app-shell',
   templateUrl: './shell.component.html',
   styleUrls: ['./shell.component.scss'],
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false
 })
 export class ShellComponent implements OnDestroy {
