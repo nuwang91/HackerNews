@@ -7,7 +7,8 @@ import { NewsService } from '../services/news.service';
 @Component({
   selector: 'app-shell',
   templateUrl: './shell.component.html',
-  styleUrls: ['./shell.component.scss']
+  styleUrls: ['./shell.component.scss'],
+  standalone: false
 })
 export class ShellComponent implements OnDestroy {
 

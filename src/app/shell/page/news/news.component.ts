@@ -29,7 +29,8 @@ interface NewsItem {
 @Component({
   selector: 'app-news',
   templateUrl: './news.component.html',
-  styleUrls: ['./news.component.scss']
+  styleUrls: ['./news.component.scss'],
+  standalone: false
 })
 export class NewsComponent implements OnDestroy {
 

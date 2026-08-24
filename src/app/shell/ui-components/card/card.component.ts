@@ -4,7 +4,8 @@ import { DomSanitizer } from '@angular/platform-browser';
 @Component({
   selector: 'app-card',
   templateUrl: './card.component.html',
-  styleUrls: ['./card.component.scss']
+  styleUrls: ['./card.component.scss'],
+  standalone: false
 })
 export class CardComponent implements OnChanges {
 

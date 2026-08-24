@@ -4,7 +4,8 @@ import { Component, HostBinding, Input } from '@angular/core';
   // eslint-disable-next-line @angular-eslint/component-selector -- intentionally an attribute selector, applied to existing host elements
   selector: '[appNavItem]',
   templateUrl: './nav-item.component.html',
-  styleUrls: ['./nav-item.component.scss']
+  styleUrls: ['./nav-item.component.scss'],
+  standalone: false
 })
 export class NavItemComponent {
 
