@@ -46,6 +46,7 @@ $card-clock-size: (math.div(10px, variables.$base-rem) + rem);
     line-height: $card-body-line-height;
     color: colors.$text-black-color;
     @include mixins.text-overflow();
+    width: 100%;
   }
 
   .meta {
