@@ -15,7 +15,7 @@ bootstrapApplication(AppComponent, {
   providers: [
     provideRouter(routes),
     provideHttpClient(withXhr(), withInterceptorsFromDi()),
-    provideZoneChangeDetection()
+    provideZoneChangeDetection({ eventCoalescing: true })
   ]
 })
   .catch(err => console.error(err));
