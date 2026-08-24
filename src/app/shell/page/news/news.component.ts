@@ -1,7 +1,7 @@
 import { Component, OnDestroy, ChangeDetectionStrategy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { forkJoin, Subscription } from 'rxjs';
-import { switchMap, take } from 'rxjs/operators';
+import { EMPTY, forkJoin, Subscription } from 'rxjs';
+import { catchError, finalize, switchMap, take } from 'rxjs/operators';
 import { DataProviderService } from '../../../services/data-provider.service';
 import { NewsService } from '../../../services/news.service';
 import TimeAgo from 'javascript-time-ago';
@@ -110,10 +110,15 @@ export class NewsComponent implements OnDestroy {
   private _getItems(): void {
     this._dataProviderService.getData(this._mainUrlType, `?orderBy="$key"&limitToFirst=${this._top}`)
       .pipe(
-        switchMap((ids) => forkJoin(ids.map((id: number) => this._dataProviderService.getData('item/' + id).pipe(take(1)))))
-      ).pipe(take(1)).subscribe((items: any) => {
+        switchMap((ids) => forkJoin(ids.map((id: number) => this._dataProviderService.getData('item/' + id).pipe(take(1))))),
+        take(1),
+        catchError((error) => {
+          console.error('Failed to load news items', error);
+          return EMPTY;
+        }),
+        finalize(() => this._newsService.loading(false))
+      ).subscribe((items: any) => {
         this.newsItems = items;
-        this._newsService.loading(false);
       });
   }
 
