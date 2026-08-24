@@ -1,19 +1,24 @@
-@import '../../../../style/include';
+@use "sass:math";
 
-$nav-item-height: (24px/$base-rem + rem);
-$nav-item-padding-inline: (12px/$base-rem + rem);
-$nav-item-padding-block: (4px/$base-rem + rem);
+@use '../../../../style/include';
+@use "../../../../style/colors";
+@use "../../../../style/typography";
+@use "../../../../style/variables";
+
+$nav-item-height: (math.div(24px, variables.$base-rem) + rem);
+$nav-item-padding-inline: (math.div(12px, variables.$base-rem) + rem);
+$nav-item-padding-block: (math.div(4px, variables.$base-rem) + rem);
 
 :host {
     height: $nav-item-height;
-    border-radius: $border-radius;
-    background-color: $secondary-color;
+    border-radius: variables.$border-radius;
+    background-color: colors.$secondary-color;
     padding: $nav-item-padding-block $nav-item-padding-inline;
-    font-weight: $font-weight-bold;
-    color: $text-black-color;
+    font-weight: typography.$font-weight-bold;
+    color: colors.$text-black-color;
     line-height: 100%;
 
     &.active {
-        background-color: $primary-color;
+        background-color: colors.$primary-color;
     }
 }

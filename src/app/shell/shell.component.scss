@@ -1,44 +1,51 @@
-@import "../../style/include";
+@use "sass:math";
 
-$shell-button-line-height: (22px / $base-rem + rem);
+@use "../../style/include";
+@use "../../style/colors";
+@use "../../style/mixins";
+@use "../../style/responsive";
+@use "../../style/typography";
+@use "../../style/variables";
+
+$shell-button-line-height: (math.div(22px, variables.$base-rem) + rem);
 
 :host {
   height: inherit;
   width: inherit;
-  @include display-flex;
-  @include flex-wrap(wrap);
+  @include mixins.display-flex;
+  @include mixins.flex-wrap(wrap);
   overflow: hidden;
 }
 
 .container {
-  padding-block-start: $spacing-small;
-  padding-block-end: $spacing-small;
-  height: calc(100% - #{$footer-height} - #{$header-height});
-  @media #{$md-only} {
-    @media #{$landscape} {
-      height: calc(100% - #{$header-height});
+  padding-block-start: variables.$spacing-small;
+  padding-block-end: variables.$spacing-small;
+  height: calc(100% - #{variables.$footer-height} - #{variables.$header-height});
+  @media #{responsive.$md-only} {
+    @media #{responsive.$landscape} {
+      height: calc(100% - #{variables.$header-height});
     }
   }
 
   width: 100%;
-  @include display-flex;
+  @include mixins.display-flex;
   flex-flow: column;
 
   .nav {
     a {
-      margin-inline-end: $spacing-tiny;
+      margin-inline-end: variables.$spacing-tiny;
       text-decoration: none;
     }
-    padding-inline-start: $spacing-small;
-    padding-inline-end: $spacing-small;
+    padding-inline-start: variables.$spacing-small;
+    padding-inline-end: variables.$spacing-small;
     align-self: flex-start;
-    margin-block-end: $spacing-small;
+    margin-block-end: variables.$spacing-small;
   }
 
   .button-wrapper {
-    margin-block-start: $spacing-small;
-    padding-inline-start: $spacing-small;
-    padding-inline-end: $spacing-small;
+    margin-block-start: variables.$spacing-small;
+    padding-inline-start: variables.$spacing-small;
+    padding-inline-end: variables.$spacing-small;
     position: relative;
 
     button {
@@ -46,16 +53,16 @@ $shell-button-line-height: (22px / $base-rem + rem);
       display: flex;
       justify-content: center;
       align-items: center;
-      border-radius: $border-radius;
-      height: $spacing-big;
-      font-weight: $font-weight-bold;
-      background-color: $primary-color;
+      border-radius: variables.$border-radius;
+      height: variables.$spacing-big;
+      font-weight: typography.$font-weight-bold;
+      background-color: colors.$primary-color;
       line-height: $shell-button-line-height;
       color: #000000;
 
       .spinner {
         margin-inline-end: 4px;
-        @include spinner(20px, 20px, 2px, $text-black-color);
+        @include mixins.spinner(20px, 20px, 2px, colors.$text-black-color);
       }
     }
   }
@@ -63,11 +70,11 @@ $shell-button-line-height: (22px / $base-rem + rem);
 
 .header {
   width: 100%;
-  height: $header-height;
+  height: variables.$header-height;
   background-color: #ffffff;
   position: relative;
   align-self: flex-start;
-  box-shadow: $box-shadow;
+  box-shadow: variables.$box-shadow;
 
   &::after {
     content: " ";
@@ -86,16 +93,16 @@ $shell-button-line-height: (22px / $base-rem + rem);
 
 .overlay {
   position: absolute;
-  top: $header-height;
-  bottom: $footer-height;
-  background-color: $secondary-color;
+  top: variables.$header-height;
+  bottom: variables.$footer-height;
+  background-color: colors.$secondary-color;
   opacity: 0.7;
   z-index: 999;
   width: 100%;
   display: flex;
 
   .spinner {
-    @include spinner(40px, 40px, 4px, $text-black-color);
+    @include mixins.spinner(40px, 40px, 4px, colors.$text-black-color);
     z-index: 1000;
     margin: auto;
   }
@@ -103,15 +110,15 @@ $shell-button-line-height: (22px / $base-rem + rem);
 
 .footer {
   //Removed in landscape since space is a constraint
-  @media #{$md-only} {
-    @media #{$landscape} {
+  @media #{responsive.$md-only} {
+    @media #{responsive.$landscape} {
       display: none;
     }
   }
 
   width: 100%;
-  height: $footer-height;
-  background-color: $primary-color;
+  height: variables.$footer-height;
+  background-color: colors.$primary-color;
   position: relative;
   align-self: flex-end;
 

@@ -1,12 +1,21 @@
 import { enableProdMode, provideZoneChangeDetection } from '@angular/core';
-import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
+import { bootstrapApplication } from '@angular/platform-browser';
+import { provideHttpClient, withXhr, withInterceptorsFromDi } from '@angular/common/http';
+import { provideRouter } from '@angular/router';
 
-import { AppModule } from './app/app.module';
 import { environment } from './environments/environment';
+import { routes } from './app/app.routes';
+import { AppComponent } from './app/app.component';
 
 if (environment.production) {
   enableProdMode();
 }
 
-platformBrowserDynamic().bootstrapModule(AppModule, { applicationProviders: [provideZoneChangeDetection()] })
+bootstrapApplication(AppComponent, {
+  providers: [
+    provideRouter(routes),
+    provideHttpClient(withXhr(), withInterceptorsFromDi()),
+    provideZoneChangeDetection({ eventCoalescing: true })
+  ]
+})
   .catch(err => console.error(err));

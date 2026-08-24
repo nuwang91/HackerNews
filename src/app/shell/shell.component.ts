@@ -1,17 +1,24 @@
-import { ApplicationRef, ChangeDetectorRef, Component, OnDestroy, ChangeDetectionStrategy } from '@angular/core';
-import { ActivationEnd, NavigationEnd, NavigationStart, Router } from '@angular/router';
+import { ApplicationRef, ChangeDetectorRef, Component, OnDestroy, ChangeDetectionStrategy, inject } from '@angular/core';
+import { ActivationEnd, NavigationEnd, NavigationStart, Router, RouterLink, RouterOutlet } from '@angular/router';
 import { combineLatest, Observable, Subject, Subscription } from 'rxjs';
 import { filter } from 'rxjs/operators';
 import { NewsService } from '../services/news.service';
+import { NavItemComponent } from './ui-components/nav-item/nav-item.component';
+import { ButtonComponent } from './ui-components/button/button.component';
+import { AsyncPipe } from '@angular/common';
 
 @Component({
   selector: 'app-shell',
   templateUrl: './shell.component.html',
   styleUrls: ['./shell.component.scss'],
-  changeDetection: ChangeDetectionStrategy.Eager,
-  standalone: false
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  imports: [NavItemComponent, RouterLink, RouterOutlet, ButtonComponent, AsyncPipe]
 })
 export class ShellComponent implements OnDestroy {
+  private _router = inject(Router);
+  private _newsService = inject(NewsService);
+  private _applicationRef = inject(ApplicationRef);
+  private _changeDetectorRef = inject(ChangeDetectorRef);
 
   loading$: Observable<boolean> = this._newsService.loading$;
   newIsActive = false;
@@ -23,15 +30,10 @@ export class ShellComponent implements OnDestroy {
   private _routerSubscription: Subscription;
   private _overlaySubscription: Subscription;
 
-  constructor(
-    private _router: Router,
-    private _newsService: NewsService,
-    private _applicationRef: ApplicationRef,
-    private _changeDetectorRef: ChangeDetectorRef
-  ) {
+  constructor() {
 
     this._routerSubscription = this._router.events
-      .pipe(filter((event: any) => event instanceof ActivationEnd))
+      .pipe(filter((event) => event instanceof ActivationEnd))
       .subscribe((event: ActivationEnd) => {
         switch (event.snapshot.params.type) {
           case 'new':
@@ -45,6 +47,7 @@ export class ShellComponent implements OnDestroy {
           default:
             break;
         }
+        this._changeDetectorRef.markForCheck();
       });
 
     this._overlaySubscription = combineLatest([

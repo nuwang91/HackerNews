@@ -1,8 +1,9 @@
-@import "../../../../style/include";
+@use "../../../../style/include";
+@use "../../../../style/mixins";
 
 :host {
   background-color: inherit;
-  @include appearance;
+  @include mixins.appearance;
   outline: none;
   border: none;
   font: inherit;

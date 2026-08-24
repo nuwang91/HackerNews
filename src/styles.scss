@@ -1,7 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
-@import './style/reset';
-@import './style/include';
-@import './style/typography-runtime';
+@use 'style/reset';
+@use 'style/include';
+@use 'style/typography-runtime';
 
 html, body {
     height: 100vh;

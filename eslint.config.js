@@ -24,9 +24,6 @@ module.exports = defineConfig([
       'prefer-arrow': preferArrow
     },
     rules: {
-      '@angular-eslint/prefer-standalone': 'off',
-      '@angular-eslint/prefer-inject': 'off',
-      '@angular-eslint/prefer-on-push-component-change-detection': 'off',
       '@angular-eslint/component-selector': [
         'error',
         {
@@ -74,7 +71,6 @@ module.exports = defineConfig([
           ignoreParameters: true
         }
       ],
-      '@typescript-eslint/no-explicit-any': 'off',
       '@typescript-eslint/no-empty-function': 'off',
       'no-underscore-dangle': 'off',
       'dot-notation': 'off',

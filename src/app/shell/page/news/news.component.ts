@@ -1,11 +1,12 @@
-import { Component, OnDestroy, ChangeDetectionStrategy } from '@angular/core';
+import { ChangeDetectorRef, Component, OnDestroy, ChangeDetectionStrategy, inject } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { forkJoin, Subscription } from 'rxjs';
-import { switchMap, take } from 'rxjs/operators';
+import { EMPTY, forkJoin, Subscription } from 'rxjs';
+import { catchError, finalize, switchMap, take } from 'rxjs/operators';
 import { DataProviderService } from '../../../services/data-provider.service';
 import { NewsService } from '../../../services/news.service';
 import TimeAgo from 'javascript-time-ago';
 import en from 'javascript-time-ago/locale/en';
+import { CardComponent } from '../../ui-components/card/card.component';
 
 type NewsType = 'job' | 'story' | 'comment' | 'poll' | 'pollopt';
 
@@ -17,23 +18,27 @@ interface NewsItem {
   time: number;
   text: string;
   dead: boolean;
-  parent: any;
-  poll: any;
+  parent?: number;
+  poll?: number;
   kids: number[];
   url: string;
   score: number;
   title: string;
-  parts: any;
+  parts?: number[];
   descendants: number;
 }
 @Component({
   selector: 'app-news',
   templateUrl: './news.component.html',
   styleUrls: ['./news.component.scss'],
-  changeDetection: ChangeDetectionStrategy.Eager,
-  standalone: false
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  imports: [CardComponent]
 })
 export class NewsComponent implements OnDestroy {
+  private _dataProviderService = inject(DataProviderService);
+  private _route = inject(ActivatedRoute);
+  private _newsService = inject(NewsService);
+  private _changeDetectorRef = inject(ChangeDetectorRef);
 
   newsItems: NewsItem[] = [];
   dummyBody = 'Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, ' +
@@ -44,10 +49,7 @@ export class NewsComponent implements OnDestroy {
   private _loadMoreSubscription: Subscription;
   private _routeSubscription: Subscription;
 
-  constructor(
-    private _dataProviderService: DataProviderService,
-    private _route: ActivatedRoute,
-    private _newsService: NewsService) {
+  constructor() {
 
       this._loadMoreSubscription = this._newsService.loadMore$.subscribe(() => {
         this._newsService.loading(true);
@@ -58,6 +60,7 @@ export class NewsComponent implements OnDestroy {
       this._routeSubscription = this._route.params.subscribe((params) => {
         this._resetTop();
         this.newsItems = [];
+        this._changeDetectorRef.markForCheck();
         this._setNewsType(params.type);
         this._getItems();
       });
@@ -108,12 +111,18 @@ export class NewsComponent implements OnDestroy {
   }
 
   private _getItems(): void {
-    this._dataProviderService.getData(this._mainUrlType, `?orderBy="$key"&limitToFirst=${this._top}`)
+    this._dataProviderService.getData<number[]>(this._mainUrlType, `?orderBy="$key"&limitToFirst=${this._top}`)
       .pipe(
-        switchMap((ids) => forkJoin(ids.map((id: number) => this._dataProviderService.getData('item/' + id).pipe(take(1)))))
-      ).pipe(take(1)).subscribe((items: any) => {
+        switchMap((ids) => forkJoin(ids.map((id: number) => this._dataProviderService.getData<NewsItem>('item/' + id).pipe(take(1))))),
+        take(1),
+        catchError((error) => {
+          console.error('Failed to load news items', error);
+          return EMPTY;
+        }),
+        finalize(() => this._newsService.loading(false))
+      ).subscribe((items: NewsItem[]) => {
         this.newsItems = items;
-        this._newsService.loading(false);
+        this._changeDetectorRef.markForCheck();
       });
   }
 

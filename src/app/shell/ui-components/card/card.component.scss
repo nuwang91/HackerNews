@@ -1,49 +1,55 @@
-@import "../../../../style/include";
+@use "sass:math";
+
+@use "../../../../style/include";
+@use "../../../../style/colors";
+@use "../../../../style/mixins";
+@use "../../../../style/typography";
+@use "../../../../style/variables";
 
 //Changed the odd pixel to even number - Original was 123px
-$card-height: (124px / $base-rem + rem);
+$card-height: (math.div(124px, variables.$base-rem) + rem);
 
-$card-body-height: (44px / $base-rem + rem);
+$card-body-height: (math.div(44px, variables.$base-rem) + rem);
 
-$card-title-line-height: $spacing-small;
-$card-body-line-height: (14px / $base-rem + rem);
-$card-meta-line-height: (11px / $base-rem + rem);
+$card-title-line-height: variables.$spacing-small;
+$card-body-line-height: (math.div(14px, variables.$base-rem) + rem);
+$card-meta-line-height: (math.div(11px, variables.$base-rem) + rem);
 
-$card-title-margin-block: (4px / $base-rem + rem);
+$card-title-margin-block: (math.div(4px, variables.$base-rem) + rem);
 
-$card-line-margin-inline: (6px / $base-rem + rem);
+$card-line-margin-inline: (math.div(6px, variables.$base-rem) + rem);
 
-$card-clock-margin-inline: (3px / $base-rem + rem);
-$card-clock-size: (10px / $base-rem + rem);
+$card-clock-margin-inline: (math.div(3px, variables.$base-rem) + rem);
+$card-clock-size: (math.div(10px, variables.$base-rem) + rem);
 
 .card-container {
   height: $card-height;
   background-color: #ffffff;
-  box-shadow: $box-shadow;
-  border-radius: $border-radius;
-  padding: $spacing-small;
-  @include display-flex;
-  @include flex-wrap(wrap);
+  box-shadow: variables.$box-shadow;
+  border-radius: variables.$border-radius;
+  padding: variables.$spacing-small;
+  @include mixins.display-flex;
+  @include mixins.flex-wrap(wrap);
 
   .title {
-    font-weight: $font-weight-bold;
+    font-weight: typography.$font-weight-bold;
     font-size: 12px;
     line-height: $card-title-line-height;
     margin-block-end: $card-title-margin-block;
-    color: $text-black-color;
+    color: colors.$text-black-color;
   }
 
   .body {
     height: $card-body-height;
-    font-weight: $font-weight-normal;
+    font-weight: typography.$font-weight-normal;
     font-size: 10px;
     line-height: $card-body-line-height;
-    color: $text-black-color;
-    @include text-overflow();
+    color: colors.$text-black-color;
+    @include mixins.text-overflow();
   }
 
   .meta {
-    @include display-flex;
+    @include mixins.display-flex;
 
     .clock {
       align-self: center;
@@ -70,7 +76,7 @@ $card-clock-size: (10px / $base-rem + rem);
     .comment {
       font-size: 8px;
       line-height: $card-meta-line-height;
-      color: $text-grey-color;
+      color: colors.$text-grey-color;
       align-self: center;
     }
   }
