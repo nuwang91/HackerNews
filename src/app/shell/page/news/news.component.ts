@@ -18,13 +18,13 @@ interface NewsItem {
   time: number;
   text: string;
   dead: boolean;
-  parent: any;
-  poll: any;
+  parent?: number;
+  poll?: number;
   kids: number[];
   url: string;
   score: number;
   title: string;
-  parts: any;
+  parts?: number[];
   descendants: number;
 }
 @Component({
@@ -111,16 +111,16 @@ export class NewsComponent implements OnDestroy {
   }
 
   private _getItems(): void {
-    this._dataProviderService.getData(this._mainUrlType, `?orderBy="$key"&limitToFirst=${this._top}`)
+    this._dataProviderService.getData<number[]>(this._mainUrlType, `?orderBy="$key"&limitToFirst=${this._top}`)
       .pipe(
-        switchMap((ids) => forkJoin(ids.map((id: number) => this._dataProviderService.getData('item/' + id).pipe(take(1))))),
+        switchMap((ids) => forkJoin(ids.map((id: number) => this._dataProviderService.getData<NewsItem>('item/' + id).pipe(take(1))))),
         take(1),
         catchError((error) => {
           console.error('Failed to load news items', error);
           return EMPTY;
         }),
         finalize(() => this._newsService.loading(false))
-      ).subscribe((items: any) => {
+      ).subscribe((items: NewsItem[]) => {
         this.newsItems = items;
         this._changeDetectorRef.markForCheck();
       });

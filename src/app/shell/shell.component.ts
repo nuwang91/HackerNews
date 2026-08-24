@@ -33,7 +33,7 @@ export class ShellComponent implements OnDestroy {
   constructor() {
 
     this._routerSubscription = this._router.events
-      .pipe(filter((event: any) => event instanceof ActivationEnd))
+      .pipe(filter((event) => event instanceof ActivationEnd))
       .subscribe((event: ActivationEnd) => {
         switch (event.snapshot.params.type) {
           case 'new':

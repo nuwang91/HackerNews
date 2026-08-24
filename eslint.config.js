@@ -71,7 +71,6 @@ module.exports = defineConfig([
           ignoreParameters: true
         }
       ],
-      '@typescript-eslint/no-explicit-any': 'off',
       '@typescript-eslint/no-empty-function': 'off',
       'no-underscore-dangle': 'off',
       'dot-notation': 'off',
