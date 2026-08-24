@@ -1,4 +1,5 @@
-@import 'variables';
+@use 'variables';
+@use "range-functions";
 
 /**
  * Helper variables for media queries. Makes sure we use standard queries and not make up our own
@@ -9,24 +10,24 @@ $screen: 'only screen' !default;
 $landscape: '#{$screen} and (orientation: landscape)' !default;
 $portrait: '#{$screen} and (orientation: portrait)' !default;
 
-$sm-range: (0, $layout-breakpoint-sm - 1px) !default;
-$md-range: ($layout-breakpoint-sm, $layout-breakpoint-md - 1px) !default;
-$lg-range: ($layout-breakpoint-md, $layout-breakpoint-lg - 1px) !default;
-$xl-range: ($layout-breakpoint-lg, $layout-breakpoint-xl - 1px) !default;
+$sm-range: (0, variables.$layout-breakpoint-sm - 1px) !default;
+$md-range: (variables.$layout-breakpoint-sm, variables.$layout-breakpoint-md - 1px) !default;
+$lg-range: (variables.$layout-breakpoint-md, variables.$layout-breakpoint-lg - 1px) !default;
+$xl-range: (variables.$layout-breakpoint-lg, variables.$layout-breakpoint-xl - 1px) !default;
 
 $sm-up: $screen !default;
-$sm-only: '#{$screen} and (max-width: #{upper-bound($sm-range)})' !default;
-$sm-only-portrait: '#{$screen} and (max-width: #{upper-bound($sm-range)}) and (orientation: portrait)' !default;
+$sm-only: '#{$screen} and (max-width: #{range-functions.upper-bound($sm-range)})' !default;
+$sm-only-portrait: '#{$screen} and (max-width: #{range-functions.upper-bound($sm-range)}) and (orientation: portrait)' !default;
 
-$md-up: '#{$screen} and (min-width:#{lower-bound($md-range)})' !default;
-$md-only: '#{$screen} and (min-width:#{lower-bound($md-range)}) and (max-width:#{upper-bound($md-range)})' !default;
-$md-down: '#{$screen} and (max-width:#{upper-bound($md-range)})' !default;
+$md-up: '#{$screen} and (min-width:#{range-functions.lower-bound($md-range)})' !default;
+$md-only: '#{$screen} and (min-width:#{range-functions.lower-bound($md-range)}) and (max-width:#{range-functions.upper-bound($md-range)})' !default;
+$md-down: '#{$screen} and (max-width:#{range-functions.upper-bound($md-range)})' !default;
 
-$lg-up: '#{$screen} and (min-width:#{lower-bound($lg-range)})' !default;
-$lg-only: '#{$screen} and (min-width:#{lower-bound($lg-range)}) and (max-width:#{upper-bound($lg-range)})' !default;
+$lg-up: '#{$screen} and (min-width:#{range-functions.lower-bound($lg-range)})' !default;
+$lg-only: '#{$screen} and (min-width:#{range-functions.lower-bound($lg-range)}) and (max-width:#{range-functions.upper-bound($lg-range)})' !default;
 
-$xl-up: '#{$screen} and (min-width:#{lower-bound($xl-range)})' !default;
-$xl-only: '#{$screen} and (min-width:#{lower-bound($xl-range)}) and (max-width:#{upper-bound($xl-range)})' !default;
+$xl-up: '#{$screen} and (min-width:#{range-functions.lower-bound($xl-range)})' !default;
+$xl-only: '#{$screen} and (min-width:#{range-functions.lower-bound($xl-range)}) and (max-width:#{range-functions.upper-bound($xl-range)})' !default;
 
 $retina: (
   '#{$screen} and (-webkit-min-device-pixel-ratio: 2)',

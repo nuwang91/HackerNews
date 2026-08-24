@@ -1,3 +1,5 @@
+@use "colors";
+
 @mixin display-flex() {
   display: -webkit-flex;
   display: -moz-box;
@@ -37,7 +39,7 @@
   appearance: $value;
 }
 
-@mixin spinner($width, $height, $borderSize: 4px, $color: $text-black-color, $background-color: $primary-color) {
+@mixin spinner($width, $height, $borderSize: 4px, $color: colors.$text-black-color, $background-color: colors.$primary-color) {
   border: $borderSize solid $background-color;
   border-top: $borderSize solid $color;
   border-radius: 50%;

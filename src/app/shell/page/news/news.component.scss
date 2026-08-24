@@ -1,15 +1,18 @@
-@import "../../../../style/include";
+@use "sass:math";
 
-$news-margin-block: (12px / $base-rem + rem);
+@use "../../../../style/include";
+@use "../../../../style/variables";
+
+$news-margin-block: (math.div(12px, variables.$base-rem) + rem);
 
 :host {
   width: inherit;
   flex: 1;
   overflow-y: auto;
-  padding-inline-start: $spacing-small;
-  padding-inline-end: $spacing-small;
-  padding-block-start: $spacing-small;
-  padding-block-end: $spacing-small;
+  padding-inline-start: variables.$spacing-small;
+  padding-inline-end: variables.$spacing-small;
+  padding-block-start: variables.$spacing-small;
+  padding-block-end: variables.$spacing-small;
 }
 
 .news-container {

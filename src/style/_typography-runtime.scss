@@ -1,10 +1,11 @@
-@import "typography";
+@use "typography";
+@use "variables";
 
 html {
-    font-size: $base-rem;
+    font-size: variables.$base-rem;
 }
 
 body {
-    font-family: $font-family-sans-serif;
-    font-weight: $font-weight-normal;
+    font-family: typography.$font-family-sans-serif;
+    font-weight: typography.$font-weight-normal;
 }
