@@ -80,18 +80,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "nas-hacker:build"
+            "buildTarget": "nas-hacker:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "nas-hacker:build:production"
+              "buildTarget": "nas-hacker:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "nas-hacker:build"
+            "buildTarget": "nas-hacker:build"
           }
         },
         "test": {
