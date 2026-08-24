@@ -1,6 +1,6 @@
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { of } from 'rxjs';
 
 import { ShellComponent } from './shell.component';
@@ -12,13 +12,15 @@ describe('ShellComponent', () => {
   const mockRouter: Partial<Router> = {
     events: of()
   };
+  const mockActivatedRoute: Partial<ActivatedRoute> = {};
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
+      imports: [ShellComponent],
       schemas: [NO_ERRORS_SCHEMA],
-      declarations: [ ShellComponent ],
       providers: [
-        { provide: Router, useValue: mockRouter }
+        { provide: Router, useValue: mockRouter },
+        { provide: ActivatedRoute, useValue: mockActivatedRoute }
       ],
     })
     .compileComponents();

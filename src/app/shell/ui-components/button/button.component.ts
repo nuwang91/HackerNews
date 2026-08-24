@@ -5,8 +5,7 @@ import { Component, ChangeDetectionStrategy } from '@angular/core';
   selector: '[appButton]',
   templateUrl: './button.component.html',
   styleUrls: ['./button.component.scss'],
-  changeDetection: ChangeDetectionStrategy.Eager,
-  standalone: false
+  changeDetection: ChangeDetectionStrategy.Eager
 })
 export class ButtonComponent {
 

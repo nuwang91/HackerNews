@@ -20,7 +20,7 @@ describe('NewsComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ NewsComponent, CardComponent],
+      imports: [NewsComponent, CardComponent],
       providers: [
         { provide: DataProviderService, useValue: mockDataProviderService },
         { provide: ActivatedRoute, useValue: mockActivatedRoute },

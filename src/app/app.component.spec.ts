@@ -8,9 +8,7 @@ describe('AppComponent', () => {
     await TestBed.configureTestingModule({
       schemas: [NO_ERRORS_SCHEMA],
       imports: [
-        RouterTestingModule
-      ],
-      declarations: [
+        RouterTestingModule,
         AppComponent
       ],
     }).compileComponents();

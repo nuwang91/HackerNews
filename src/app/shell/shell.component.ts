@@ -1,15 +1,18 @@
 import { ApplicationRef, ChangeDetectorRef, Component, OnDestroy, ChangeDetectionStrategy, inject } from '@angular/core';
-import { ActivationEnd, NavigationEnd, NavigationStart, Router } from '@angular/router';
+import { ActivationEnd, NavigationEnd, NavigationStart, Router, RouterLink, RouterOutlet } from '@angular/router';
 import { combineLatest, Observable, Subject, Subscription } from 'rxjs';
 import { filter } from 'rxjs/operators';
 import { NewsService } from '../services/news.service';
+import { NavItemComponent } from './ui-components/nav-item/nav-item.component';
+import { ButtonComponent } from './ui-components/button/button.component';
+import { AsyncPipe } from '@angular/common';
 
 @Component({
   selector: 'app-shell',
   templateUrl: './shell.component.html',
   styleUrls: ['./shell.component.scss'],
   changeDetection: ChangeDetectionStrategy.Eager,
-  standalone: false
+  imports: [NavItemComponent, RouterLink, RouterOutlet, ButtonComponent, AsyncPipe]
 })
 export class ShellComponent implements OnDestroy {
   private _router = inject(Router);

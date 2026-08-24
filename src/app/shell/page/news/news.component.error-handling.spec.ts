@@ -25,7 +25,7 @@ describe('NewsComponent error handling', () => {
     };
 
     await TestBed.configureTestingModule({
-      declarations: [ NewsComponent, CardComponent],
+      imports: [NewsComponent, CardComponent],
       providers: [
         { provide: DataProviderService, useValue: mockDataProviderService },
         { provide: ActivatedRoute, useValue: mockActivatedRoute },

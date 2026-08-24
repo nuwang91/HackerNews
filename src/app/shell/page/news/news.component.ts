@@ -6,6 +6,7 @@ import { DataProviderService } from '../../../services/data-provider.service';
 import { NewsService } from '../../../services/news.service';
 import TimeAgo from 'javascript-time-ago';
 import en from 'javascript-time-ago/locale/en';
+import { CardComponent } from '../../ui-components/card/card.component';
 
 type NewsType = 'job' | 'story' | 'comment' | 'poll' | 'pollopt';
 
@@ -31,7 +32,7 @@ interface NewsItem {
   templateUrl: './news.component.html',
   styleUrls: ['./news.component.scss'],
   changeDetection: ChangeDetectionStrategy.Eager,
-  standalone: false
+  imports: [CardComponent]
 })
 export class NewsComponent implements OnDestroy {
   private _dataProviderService = inject(DataProviderService);

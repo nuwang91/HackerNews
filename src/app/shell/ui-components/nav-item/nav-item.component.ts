@@ -5,8 +5,7 @@ import { Component, HostBinding, Input, ChangeDetectionStrategy } from '@angular
   selector: '[appNavItem]',
   templateUrl: './nav-item.component.html',
   styleUrls: ['./nav-item.component.scss'],
-  changeDetection: ChangeDetectionStrategy.Eager,
-  standalone: false
+  changeDetection: ChangeDetectionStrategy.Eager
 })
 export class NavItemComponent {
 
