@@ -25,6 +25,7 @@
       ],
       "rules": {
         "@angular-eslint/prefer-standalone": "off",
+        "@angular-eslint/prefer-inject": "off",
         "@angular-eslint/component-selector": [
           "error",
           {
