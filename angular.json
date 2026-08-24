@@ -80,7 +80,12 @@
         "serve": {
           "builder": "@angular/build:dev-server",
           "options": {
-            "buildTarget": "nas-hacker:build"
+            "buildTarget": "nas-hacker:build",
+            "prebundle": {
+              "exclude": [
+                "javascript-time-ago"
+              ]
+            }
           },
           "configurations": {
             "production": {
