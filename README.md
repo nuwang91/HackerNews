@@ -34,9 +34,15 @@ Run `ng build` to build the project. This produces a development build by defaul
 
 ## Running Locally with Docker
 
-Run `docker build -t nas-hacker .` to build the Docker image.
+Run `docker build -t nas-hacker .` or `npm run docker:build` to build the Docker image.
 
-Run `docker run -p 8080:80 nas-hacker` to start the container, then open `http://localhost:8080`.
+Run `docker run -p 8080:80 nas-hacker` or `npm run docker:run` to start the container, then open `http://localhost:8080`.
+
+## Deploying to GitHub Pages
+
+Run `npm run deploy` (or `ng deploy`) to build the app in production mode and push it to the `gh-pages` branch via [angular-cli-ghpages](https://github.com/angularclass/angular-cli-ghpages). The `baseHref` is already configured for this repository in `angular.json`, so no extra flags are needed.
+
+Once deployed, the app is available at https://nuwang91.github.io/HackerNews/
 
 ## Running unit tests
 

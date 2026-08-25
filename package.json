@@ -7,6 +7,9 @@
     "start": "ng serve",
     "build": "ng build",
     "lint": "ng lint",
+    "deploy": "ng deploy",
+    "docker:build": "docker build -t nas-hacker .",
+    "docker:run": "docker run -p 8080:80 nas-hacker",
     "test-unit": "jest",
     "test:watch": "jest --watch"
   },
